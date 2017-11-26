@@ -1,0 +1,56 @@
+#!/bin/bash
+# 
+# 修复内核脚本
+# Auska
+#
+
+dir=${0%/*}
+if [ -d "$dir" ]; then
+  cd "$dir"
+fi
+
+while [ ! -d /Volumes/$VOLUME/System ]; do  
+printf "\n\================ 修复内核脚本 ================\ \n"
+printf "\n\n\n请输入需要修复内核的磁盘 ? \n( 直接 Enter 退出 ！ )\n\n>> "
+read VOLUME
+printf "\n\n 你选择的磁盘为: $VOLUME "
+if [ -z $VOLUME ]; then 
+printf "\n=> 退出中......\n"
+exit 1
+fi
+if [ -d /Volumes/$VOLUME/System ]; then 
+break
+else
+printf "\n\n==> 读取磁盘错误 !\n"
+fi
+done
+
+printf "\n=> 正在安装AMD内核...\n"
+cp -Rf ./Kernels/kernel /Volumes/$VOLUME/System/Library/Kernels/kernel
+touch /Volumes/$VOLUME/System/Library/Kernels/kernel
+printf "\n=> 正在删除一些不需要的Kext ...\n"
+rm -rf /Volumes/$VOLUME/System/Library/Extensions/AppleIntelCPUPowerManagement.kext
+rm -rf /Volumes/$VOLUME/System/Library/Extensions/pmtelemetry.kext
+rm -rf /Volumes/$VOLUME/System/Library/Extensions/AppleTyMCEDriver.kext
+printf "\n=> 正在安装必要的Kext ...\n"
+cp -Rf ./Extensions/*.kext /Volumes/$VOLUME/System/Library/Extensions/
+touch /Volumes/$VOLUME/System/Library/Extensions/
+printf "\n=> 正在修复USB ...\n"
+rm -rf /Volumes/$VOLUME/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/VDC.plugin
+rm -rf /Volumes/$VOLUME/System/Library/SystemProfiler/SPUSBReporter.spreporter
+cp -Rf ./USBfix/VDC.plugin /Volumes/$VOLUME/System/Library/Frameworks/CoreMediaIO.framework/Versions/A/Resources/
+cp -Rf ./USBfix/SPUSBReporter.spreporter /Volumes/$VOLUME/System/Library/SystemProfiler/
+printf "\n=> 应用USB修复 ...\n"
+cp -Rf ./USBfix/*.kext /Volumes/$VOLUME/System/Library/Extensions/
+printf "\n=> 修复文件权限 ...\n"
+chown -R 0:0 /Volumes/$VOLUME/System/Library/Extensions/ && chmod -R 755 /Volumes/$VOLUME/System/Library/Extensions/
+printf "\n=> 删除旧内核缓存；重建AMD内核缓存 ...\n"
+printf "\n   重建缓存日志: \n"
+rm -rf /Volumes/$VOLUME/System/Caches/com.apple.kext.caches
+rm -rf /Volumes/$VOLUME/System/Library/PrelinkedKernels/prelinkedkernel
+kextcache -u /Volumes/$VOLUME/
+printf "\n=> 完成 !\n"
+printf "\n=> 退出中......\n"
+printf "\n =============== 现在你可以重启系统了 =============== \n"
+
+exit 0

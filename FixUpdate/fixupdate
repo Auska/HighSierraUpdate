@@ -1,0 +1,35 @@
+#!/bin/bash
+# 
+# 修复安装更新脚本
+# Auska
+#
+
+dir=${0%/*}
+if [ -d "$dir" ]; then
+  cd "$dir"
+fi
+
+while [ ! -d /Volumes/$VOLUME/System ]; do  
+printf "\n\================ 修复安装更新脚本 ================\ \n"
+printf "\n\n\n请输入需要修复安装更新的磁盘 ? \n( 直接 Enter 退出 ！ )\n\n>> "
+read VOLUME
+printf "\n\n 你选择的磁盘为: $VOLUME "
+if [ -z $VOLUME ]; then 
+printf "\n=> 退出中......\n"
+exit 1
+fi
+if [ -d /Volumes/$VOLUME/System ]; then 
+break
+else
+printf "\n\n==> 读取磁盘错误 !\n"
+fi
+done
+
+printf "\n\n 安装更新的磁盘为 : $VOLUME "
+printf "\n=> 正在修复更新...\n"
+cp -Rf ./Prelinkedkernel/prelinkedkernel /Volumes/$VOLUME/macOS\ Install\ Data/Locked\ Files/Boot\ Files/prelinkedkernel
+touch /Volumes/$VOLUME/macOS\ Install\ Data/Locked\ Files/Boot\ Files/prelinkedkernel
+sed -i '' 's/auth-//g' /Volumes/$VOLUME/macOS\ Install\ Data/Locked\ Files/Boot\ Files/com.apple.Boot.plist 
+printf "\n=> 完成 !\n"
+printf "\n 你现在可以重启完成安装；完成安装后请再回来修复内核 !\n\n"
+exit 0

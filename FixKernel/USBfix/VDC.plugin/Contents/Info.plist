@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>14F17</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleExecutable</key>
+	<string>VDC</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.cmio.DAL.VDC-4</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>VDC Video</string>
+	<key>CFBundlePackageType</key>
+	<string>BNDL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>601.0</string>
+	<key>CFBundleSignature</key>
+	<string>????</string>
+	<key>CFBundleVersion</key>
+	<string>4760</string>
+	<key>CFPlugInFactories</key>
+	<dict>
+		<key>C3E63314-EFF3-11DA-878B-00145162A98B</key>
+		<string>VDCVideoNewPlugIn</string>
+	</dict>
+	<key>CFPlugInTypes</key>
+	<dict>
+		<key>30010C1C-93BF-11D8-8B5B-000A95AF9C6A</key>
+		<array>
+			<string>C3E63314-EFF3-11DA-878B-00145162A98B</string>
+		</array>
+	</dict>
+	<key>CMIOHardwareAssistantServiceNames</key>
+	<array>
+		<string>com.apple.cmio.VDCAssistant</string>
+	</array>
+	<key>CMIOHardwarePlugInLazyLoadingInfo</key>
+	<array>
+		<dict>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>34049</integer>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
+		<dict>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>bDeviceClass</key>
+			<integer>239</integer>
+			<key>bDeviceProtocol</key>
+			<integer>1</integer>
+			<key>bDeviceSubClass</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>6D543f</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>14E40</string>
+	<key>DTSDKName</key>
+	<string>macosx10.10internal</string>
+	<key>DTXcode</key>
+	<string>0630</string>
+	<key>DTXcodeBuild</key>
+	<string>6D543f</string>
+</dict>
+</plist>
